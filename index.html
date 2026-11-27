@@ -686,18 +686,82 @@
       color: var(--muted);
     }
 
-    /* Photos Gallery */
-    .photo-toolbar {
+    .specialist-list {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .specialist-list li {
+      margin-bottom: 6px;
+    }
+
+    /* Photos Gallery Swimlanes */
+    .photo-swimlanes {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+
+    .photo-swimlane {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: var(--space-6);
+      border-top: 5px solid var(--glow-cyan);
+    }
+
+    .photo-swimlane[data-swimlane="2025"] {
+      border-top-color: var(--glow-violet);
+    }
+
+    .photo-swimlane[data-swimlane="2026"] {
+      border-top-color: var(--glow-lime);
+    }
+
+    .swimlane-header {
+      display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .swimlane-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    .swimlane-dates {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--brand-dark);
+      background: var(--surface-alt);
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+    }
+
+    .swimlane-track {
+      display: flex;
       gap: var(--space-4);
-      padding: var(--space-4) var(--space-6);
-      background: linear-gradient(135deg, #ecfeff, #f7fee7);
-      border: 1px solid #a5f3fc;
-      border-radius: var(--radius);
-      margin-bottom: var(--space-6);
+      overflow-x: auto;
+      padding-bottom: var(--space-2);
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 transparent;
+    }
+
+    .swimlane-track .photo-card {
+      flex: 0 0 290px;
+      scroll-snap-align: start;
     }
 
     .photo-grid {
@@ -788,12 +852,6 @@
       font-size: 14px;
       color: var(--ink);
       font-weight: 600;
-    }
-
-    .photo-file {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--muted);
     }
 
     /* Contact Card */
@@ -890,7 +948,7 @@
 
       <nav class="nav-tabs" aria-label="Primary Navigation">
         <button type="button" class="nav-btn" data-page-target="about" aria-current="page">About Botzilla</button>
-        <button type="button" class="nav-btn" data-page-target="seasons">Seasons &amp; Performances</button>
+        <button type="button" class="nav-btn" data-page-target="seasons">Seasons &amp; Performance</button>
         <button type="button" class="nav-btn" data-page-target="photos">Photos</button>
         <button type="button" class="nav-btn" data-page-target="contact">Contact Us</button>
       </nav>
@@ -929,9 +987,9 @@
             responsibilities each season as we learn and grow together.
           </p>
           <div class="member-grid" aria-label="Botzilla Team Members">
-            <div class="member-chip"><span class="member-avatar">PK</span>Poshya Sai Kunchakuri</div>
             <div class="member-chip"><span class="member-avatar">SA</span>Siddharth Andaloori</div>
             <div class="member-chip"><span class="member-avatar">AA</span>Ayaansh Aggarwal</div>
+            <div class="member-chip"><span class="member-avatar">PK</span>Poshya Sai Kunchakuri</div>
             <div class="member-chip"><span class="member-avatar">DK</span>Dhruv Khurana</div>
             <div class="member-chip"><span class="member-avatar">SS</span>Srimanya Sarikonda</div>
           </div>
@@ -945,6 +1003,7 @@
               <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--teal); letter-spacing: 0.04em;">Head Coach</div>
               <div style="font-size: 18px; font-weight: 800; color: var(--ink);">Rajesh Ninganola</div>
               <div style="font-size: 13px; color: var(--muted);">Recipient of the Best Coach Award at the 2024 State Championship</div>
+              <div style="font-size: 13px; margin-top: 4px;"><a href="mailto:nraj13@gmail.com">nraj13@gmail.com</a></div>
             </div>
           </div>
 
@@ -963,10 +1022,10 @@
       </div>
     </section>
 
-    <!-- PAGE 2: SEASONS AND PERFORMANCES -->
+    <!-- PAGE 2: SEASONS AND PERFORMANCE -->
     <section id="page-seasons" class="page-section" aria-labelledby="seasons-heading">
       <div class="section-header">
-        <h2 id="seasons-heading">Seasons &amp; Performances (2024–2026)</h2>
+        <h2 id="seasons-heading">Seasons &amp; Performance (2024–2026)</h2>
         <p>Competition milestones, Innovation Projects, specialist research, and Robot Design across three FLL Challenge seasons.</p>
       </div>
 
@@ -1004,11 +1063,19 @@
                 bees for mites and trigger a bottom heater to raise the hive temperature to <strong>104°F</strong>—deadly to varroa mites
                 while safe for bees, honey, and wax—dropping dead mites into a bottom collecting tray.
               </p>
-              <p>
-                <strong>Specialist Research:</strong> Consulted 8 specialists including Mr. Randy Oliver, Mr. Maben (beeswax frames &amp;
-                farm testing), Mr. Ternlund (bottom heater placement near brood cells &amp; distributed thermal sensors), Ms. Kirby,
-                Mr. Martin, Mr. Hayes, Ms. Heck, Ms. Mccormack, and Mr. Paul.
+              <p style="margin-bottom: 6px;">
+                <strong>Specialist Research:</strong> Consulted 8 specialists:
               </p>
+              <ul class="specialist-list">
+                <li><strong>Ms. Ana Heck</strong> — Apiculture Extension Educator at Michigan State University (MSU) who educates beekeepers, growers, pesticide applicators, and the public on honey bee health and pollinator protection.</li>
+                <li><strong>Prof. Grace McCormack</strong> — Zoologist and Personal Professor at the <a href="https://research.universityofgalway.ie/en/persons/grace-patricia-mccormack/" target="_blank" rel="noopener">University of Galway</a> who leads research on the dark native Irish honey bee and free-living honeybee colonies.</li>
+                <li><strong>Mr. Jerry Hayes</strong> — Beekeeping expert and Bee Culture magazine editor.</li>
+                <li><strong>Mr. Stephen Martin</strong> — UK entomologist and Chair in Social Entomology at the <a href="https://www.salford.ac.uk/our-staff/stephen-martin" target="_blank" rel="noopener">University of Salford</a>, known for nearly four decades of research on social insects, honeybee pests, and Varroa destructor mites.</li>
+                <li><strong>Ms. Melanie Kirby</strong> — Cofounder of Zia Queenbees Farm; has researched bees and pollination for over 3 decades.</li>
+                <li><strong>Mr. Egbert N. Maben</strong> — A beekeeper for 35+ years.</li>
+                <li><strong>Mr. Randy Oliver</strong> — Prominent American commercial beekeeper, biologist, researcher, and educator based in Northern California, best known as the founder of <a href="https://scientificbeekeeping.com/" target="_blank" rel="noopener">Scientific Beekeeping</a>.</li>
+                <li><strong>Mr. Paul Ternlund</strong> — Beekeeper and owner of an apiary in Aurora, CO.</li>
+              </ul>
             </div>
             <div class="detail-block">
               <h4>Robot Design &amp; Strategy</h4>
@@ -1121,259 +1188,260 @@
     <section id="page-photos" class="page-section" aria-labelledby="photos-heading">
       <div class="section-header">
         <h2 id="photos-heading">Team Photos (2024–2026)</h2>
-        <p>Organized chronologically by the date each photo was taken across Submerged, Unearthed, Open Invitational, and BioGlow.</p>
+        <p>Collection of photos from across Submerged, Unearthed, and BioGlow seasons</p>
       </div>
 
-      <div class="photo-toolbar">
-        <div style="font-size: 13px; color: var(--ink);">
-          <strong>Hosting tip:</strong> Place your photo files in the same folder as <code>index.html</code>, or select them here to preview immediately:
-        </div>
-        <label class="btn btn-primary" style="margin: 0; cursor: pointer;">
-          Load Local Photos
-          <input type="file" id="photo-picker" accept="image/*" multiple style="display: none;" />
-        </label>
-      </div>
+      <div class="photo-swimlanes" id="photo-swimlanes">
+        <!-- SWIMLANE 1: 2024 SUBMERGED -->
+        <section class="photo-swimlane" data-swimlane="2024" aria-labelledby="swimlane-2024">
+          <div class="swimlane-header">
+            <h3 class="swimlane-title" id="swimlane-2024">2024 Submerged Season</h3>
+            <span class="swimlane-dates">Nov – Dec 2024</span>
+          </div>
+          <div class="swimlane-track">
+            <article class="photo-card" data-filename="IMG-20241117-WA0041.jpg">
+              <div class="photo-frame">
+                <img src="IMG-20241117-WA0041.jpg" alt="Team Botzilla collaborating around a laptop during 2024 Submerged prep" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <div class="photo-fallback">Photo file:<br /><code>IMG-20241117-WA0041.jpg</code></div>
+              </div>
+              <div class="photo-meta">
+                <div class="photo-date-row">
+                  <span class="photo-date">Nov 17, 2024</span>
+                  <span class="photo-season-tag">2024 · Submerged</span>
+                </div>
+                <p class="photo-caption">Team Botzilla brainstorming and coding together during Submerged season prep.</p>
+              </div>
+            </article>
 
-      <div class="photo-grid" id="photo-grid">
-        <article class="photo-card" data-filename="IMG-20241117-WA0041.jpg">
-          <div class="photo-frame">
-            <img src="IMG-20241117-WA0041.jpg" alt="Team Botzilla collaborating around a laptop during 2024 Submerged prep" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            <div class="photo-fallback">Photo file:<br /><code>IMG-20241117-WA0041.jpg</code></div>
-          </div>
-          <div class="photo-meta">
-            <div class="photo-date-row">
-              <span class="photo-date">Nov 17, 2024</span>
-              <span class="photo-season-tag">2024 · Submerged</span>
-            </div>
-            <p class="photo-caption">Team Botzilla brainstorming and coding together during Submerged season prep.</p>
-            <span class="photo-file">IMG-20241117-WA0041.jpg</span>
-          </div>
-        </article>
+            <article class="photo-card" data-filename="IMG-20241123-WA0028.jpg">
+              <div class="photo-frame">
+                <img src="IMG-20241123-WA0028.jpg" alt="Team Botzilla with coaches holding the 2024 Submerged trophy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <div class="photo-fallback">Photo file:<br /><code>IMG-20241123-WA0028.jpg</code></div>
+              </div>
+              <div class="photo-meta">
+                <div class="photo-date-row">
+                  <span class="photo-date">Nov 23, 2024</span>
+                  <span class="photo-season-tag">2024 · Submerged</span>
+                </div>
+                <p class="photo-caption">Team Botzilla and coaches celebrating with their FIRST LEGO League Challenge trophy.</p>
+              </div>
+            </article>
 
-        <article class="photo-card" data-filename="IMG-20241123-WA0028.jpg">
-          <div class="photo-frame">
-            <img src="IMG-20241123-WA0028.jpg" alt="Team Botzilla with coaches holding the 2024 Submerged trophy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            <div class="photo-fallback">Photo file:<br /><code>IMG-20241123-WA0028.jpg</code></div>
-          </div>
-          <div class="photo-meta">
-            <div class="photo-date-row">
-              <span class="photo-date">Nov 23, 2024</span>
-              <span class="photo-season-tag">2024 · Submerged</span>
-            </div>
-            <p class="photo-caption">Team Botzilla and coaches celebrating with their FIRST LEGO League Challenge trophy.</p>
-            <span class="photo-file">IMG-20241123-WA0028.jpg</span>
-          </div>
-        </article>
+            <article class="photo-card" data-filename="IMG-20241123-WA0051.jpg">
+              <div class="photo-frame">
+                <img src="IMG-20241123-WA0051.jpg" alt="Team Botzilla cheering with their Submerged robot" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <div class="photo-fallback">Photo file:<br /><code>IMG-20241123-WA0051.jpg</code></div>
+              </div>
+              <div class="photo-meta">
+                <div class="photo-date-row">
+                  <span class="photo-date">Nov 23, 2024</span>
+                  <span class="photo-season-tag">2024 · Submerged</span>
+                </div>
+                <p class="photo-caption">Botzilla teammates cheering with their Submerged robot at the 2024 Qualifier.</p>
+              </div>
+            </article>
 
-        <article class="photo-card" data-filename="IMG-20241123-WA0051.jpg">
-          <div class="photo-frame">
-            <img src="IMG-20241123-WA0051.jpg" alt="Team Botzilla cheering with their Submerged robot" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            <div class="photo-fallback">Photo file:<br /><code>IMG-20241123-WA0051.jpg</code></div>
-          </div>
-          <div class="photo-meta">
-            <div class="photo-date-row">
-              <span class="photo-date">Nov 23, 2024</span>
-              <span class="photo-season-tag">2024 · Submerged</span>
-            </div>
-            <p class="photo-caption">Botzilla teammates cheering with their Submerged robot at the 2024 Qualifier.</p>
-            <span class="photo-file">IMG-20241123-WA0051.jpg</span>
-          </div>
-        </article>
+            <article class="photo-card" data-filename="IMG-20241206-WA0062.jpg">
+              <div class="photo-frame">
+                <img src="IMG-20241206-WA0062.jpg" alt="Team Botzilla with Coach Rajesh Ninganola and Submerged robot" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <div class="photo-fallback">Photo file:<br /><code>IMG-20241206-WA0062.jpg</code></div>
+              </div>
+              <div class="photo-meta">
+                <div class="photo-date-row">
+                  <span class="photo-date">Dec 6, 2024</span>
+                  <span class="photo-season-tag">2024 · Submerged</span>
+                </div>
+                <p class="photo-caption">Team Botzilla practicing with Coach Rajesh Ninganola on the Submerged field mat.</p>
+              </div>
+            </article>
 
-        <article class="photo-card" data-filename="IMG-20241206-WA0062.jpg">
-          <div class="photo-frame">
-            <img src="IMG-20241206-WA0062.jpg" alt="Team Botzilla with Coach Rajesh Ninganola and Submerged robot" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            <div class="photo-fallback">Photo file:<br /><code>IMG-20241206-WA0062.jpg</code></div>
+            <article class="photo-card" data-filename="20241207_114349.jpg">
+              <div class="photo-frame">
+                <img src="20241207_114349.jpg" alt="Team Botzilla at 2024 Submerged Qualifier with R2-D2" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <div class="photo-fallback">Photo file:<br /><code>20241207_114349.jpg</code></div>
+              </div>
+              <div class="photo-meta">
+                <div class="photo-date-row">
+                  <span class="photo-date">Dec 7, 2024 · 11:43 AM</span>
+                  <span class="photo-season-tag">2024 · Submerged</span>
+                </div>
+                <p class="photo-caption">Team Botzilla meeting R2-D2 at the 2024 Submerged Qualifier.</p>
+              </div>
+            </article>
           </div>
-          <div class="photo-meta">
-            <div class="photo-date-row">
-              <span class="photo-date">Dec 6, 2024</span>
-              <span class="photo-season-tag">2024 · Submerged</span>
-            </div>
-            <p class="photo-caption">Team Botzilla practicing with Coach Rajesh Ninganola on the Submerged field mat.</p>
-            <span class="photo-file">IMG-20241206-WA0062.jpg</span>
-          </div>
-        </article>
+        </section>
 
-        <article class="photo-card" data-filename="20241207_114349.jpg">
-          <div class="photo-frame">
-            <img src="20241207_114349.jpg" alt="Team Botzilla at 2024 Submerged Qualifier with R2-D2" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            <div class="photo-fallback">Photo file:<br /><code>20241207_114349.jpg</code></div>
+        <!-- SWIMLANE 2: 2025 UNEARTHED -->
+        <section class="photo-swimlane" data-swimlane="2025" aria-labelledby="swimlane-2025">
+          <div class="swimlane-header">
+            <h3 class="swimlane-title" id="swimlane-2025">2025 Unearthed Season</h3>
+            <span class="swimlane-dates">Oct 2025 – Jun 2026</span>
           </div>
-          <div class="photo-meta">
-            <div class="photo-date-row">
-              <span class="photo-date">Dec 7, 2024 · 11:43 AM</span>
-              <span class="photo-season-tag">2024 · Submerged</span>
-            </div>
-            <p class="photo-caption">Team Botzilla meeting R2-D2 at the 2024 Submerged Qualifier.</p>
-            <span class="photo-file">20241207_114349.jpg</span>
-          </div>
-        </article>
+          <div class="swimlane-track">
+            <article class="photo-card" data-filename="PXL_20251026_173822075.jpg">
+              <div class="photo-frame">
+                <img src="PXL_20251026_173822075.jpg" alt="Team Botzilla with Dr. Holly Norton, Innovation Project board, and Godzilla 2.0 rover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <div class="photo-fallback">Photo file:<br /><code>PXL_20251026_173822075.jpg</code></div>
+              </div>
+              <div class="photo-meta">
+                <div class="photo-date-row">
+                  <span class="photo-date">Oct 26, 2025</span>
+                  <span class="photo-season-tag">2025 · Unearthed</span>
+                </div>
+                <p class="photo-caption">Specialist visit with Dr. Holly Norton, the Innovation Project board, and Godzilla 2.0 rover.</p>
+              </div>
+            </article>
 
-        <article class="photo-card" data-filename="PXL_20251026_173822075.jpg">
-          <div class="photo-frame">
-            <img src="PXL_20251026_173822075.jpg" alt="Team Botzilla with Dr. Holly Norton, Innovation Project board, and Godzilla 2.0 rover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            <div class="photo-fallback">Photo file:<br /><code>PXL_20251026_173822075.jpg</code></div>
-          </div>
-          <div class="photo-meta">
-            <div class="photo-date-row">
-              <span class="photo-date">Oct 26, 2025</span>
-              <span class="photo-season-tag">2025 · Unearthed</span>
-            </div>
-            <p class="photo-caption">Specialist visit with Dr. Holly Norton, the Innovation Project board, and Godzilla 2.0 rover.</p>
-            <span class="photo-file">PXL_20251026_173822075.jpg</span>
-          </div>
-        </article>
+            <article class="photo-card" data-filename="IMG-20251108-WA0092.jpg">
+              <div class="photo-frame">
+                <img src="IMG-20251108-WA0092.jpg" alt="Team Botzilla on the bleachers with trophies at the 2025 Unearthed Qualifier" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <div class="photo-fallback">Photo file:<br /><code>IMG-20251108-WA0092.jpg</code></div>
+              </div>
+              <div class="photo-meta">
+                <div class="photo-date-row">
+                  <span class="photo-date">Nov 8, 2025</span>
+                  <span class="photo-season-tag">2025 · Unearthed</span>
+                </div>
+                <p class="photo-caption">Team Botzilla celebrating with their trophies on the bleachers at the 2025 Unearthed Qualifier.</p>
+              </div>
+            </article>
 
-        <article class="photo-card" data-filename="IMG-20251108-WA0092.jpg">
-          <div class="photo-frame">
-            <img src="IMG-20251108-WA0092.jpg" alt="Team Botzilla on the bleachers with trophies at the 2025 Unearthed Qualifier" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            <div class="photo-fallback">Photo file:<br /><code>IMG-20251108-WA0092.jpg</code></div>
-          </div>
-          <div class="photo-meta">
-            <div class="photo-date-row">
-              <span class="photo-date">Nov 8, 2025</span>
-              <span class="photo-season-tag">2025 · Unearthed</span>
-            </div>
-            <p class="photo-caption">Team Botzilla celebrating with their trophies on the bleachers at the 2025 Unearthed Qualifier.</p>
-            <span class="photo-file">IMG-20251108-WA0092.jpg</span>
-          </div>
-        </article>
+            <article class="photo-card" data-filename="PXL_20251206_183107619.MP.jpg">
+              <div class="photo-frame">
+                <img src="PXL_20251206_183107619.MP.jpg" alt="Botzilla team members with R2-D2 at 2025 Unearthed Qualifier" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <div class="photo-fallback">Photo file:<br /><code>PXL_20251206_183107619.MP.jpg</code></div>
+              </div>
+              <div class="photo-meta">
+                <div class="photo-date-row">
+                  <span class="photo-date">Dec 6, 2025 · 6:31 PM</span>
+                  <span class="photo-season-tag">2025 · Unearthed</span>
+                </div>
+                <p class="photo-caption">Checking out R2-D2 on the competition floor during the 2025 Unearthed Qualifier.</p>
+              </div>
+            </article>
 
-        <article class="photo-card" data-filename="PXL_20251206_183107619.MP.jpg">
-          <div class="photo-frame">
-            <img src="PXL_20251206_183107619.MP.jpg" alt="Botzilla team members with R2-D2 at 2025 Unearthed Qualifier" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            <div class="photo-fallback">Photo file:<br /><code>PXL_20251206_183107619.MP.jpg</code></div>
-          </div>
-          <div class="photo-meta">
-            <div class="photo-date-row">
-              <span class="photo-date">Dec 6, 2025 · 6:31 PM</span>
-              <span class="photo-season-tag">2025 · Unearthed</span>
-            </div>
-            <p class="photo-caption">Checking out R2-D2 on the competition floor during the 2025 Unearthed Qualifier.</p>
-            <span class="photo-file">PXL_20251206_183107619.MP.jpg</span>
-          </div>
-        </article>
+            <article class="photo-card" data-filename="PXL_20251206_234452888.jpg">
+              <div class="photo-frame">
+                <img src="PXL_20251206_234452888.jpg" alt="Team Botzilla holding LEGO trophy and FLL medals" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <div class="photo-fallback">Photo file:<br /><code>PXL_20251206_234452888.jpg</code></div>
+              </div>
+              <div class="photo-meta">
+                <div class="photo-date-row">
+                  <span class="photo-date">Dec 6, 2025 · 11:44 PM</span>
+                  <span class="photo-season-tag">2025 · Unearthed</span>
+                </div>
+                <p class="photo-caption">Celebrating with the LEGO trophy and FLL medals in front of the FIRST banner.</p>
+              </div>
+            </article>
 
-        <article class="photo-card" data-filename="PXL_20251206_234452888.jpg">
-          <div class="photo-frame">
-            <img src="PXL_20251206_234452888.jpg" alt="Team Botzilla holding LEGO trophy and FLL medals" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            <div class="photo-fallback">Photo file:<br /><code>PXL_20251206_234452888.jpg</code></div>
-          </div>
-          <div class="photo-meta">
-            <div class="photo-date-row">
-              <span class="photo-date">Dec 6, 2025 · 11:44 PM</span>
-              <span class="photo-season-tag">2025 · Unearthed</span>
-            </div>
-            <p class="photo-caption">Celebrating with the LEGO trophy and FLL medals in front of the FIRST banner.</p>
-            <span class="photo-file">PXL_20251206_234452888.jpg</span>
-          </div>
-        </article>
+            <article class="photo-card" data-filename="IMG-20251206-WA0049.jpg">
+              <div class="photo-frame">
+                <img src="IMG-20251206-WA0049.jpg" alt="Team Botzilla holding two LEGO trophies and medals in front of the FIRST banner" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <div class="photo-fallback">Photo file:<br /><code>IMG-20251206-WA0049.jpg</code></div>
+              </div>
+              <div class="photo-meta">
+                <div class="photo-date-row">
+                  <span class="photo-date">Dec 6, 2025</span>
+                  <span class="photo-season-tag">2025 · Unearthed</span>
+                </div>
+                <p class="photo-caption">Holding up two LEGO trophies and FLL medals at the 2025 Unearthed tournament.</p>
+              </div>
+            </article>
 
-        <article class="photo-card" data-filename="IMG-20251206-WA0049.jpg">
-          <div class="photo-frame">
-            <img src="IMG-20251206-WA0049.jpg" alt="Team Botzilla holding two LEGO trophies and medals in front of the FIRST banner" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            <div class="photo-fallback">Photo file:<br /><code>IMG-20251206-WA0049.jpg</code></div>
-          </div>
-          <div class="photo-meta">
-            <div class="photo-date-row">
-              <span class="photo-date">Dec 6, 2025</span>
-              <span class="photo-season-tag">2025 · Unearthed</span>
-            </div>
-            <p class="photo-caption">Holding up two LEGO trophies and FLL medals at the 2025 Unearthed tournament.</p>
-            <span class="photo-file">IMG-20251206-WA0049.jpg</span>
-          </div>
-        </article>
+            <article class="photo-card" data-filename="IMG-20251206-WA0060.jpg">
+              <div class="photo-frame">
+                <img src="IMG-20251206-WA0060.jpg" alt="Team Botzilla, coaches, and families celebrating with trophies in front of the FIRST banner" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <div class="photo-fallback">Photo file:<br /><code>IMG-20251206-WA0060.jpg</code></div>
+              </div>
+              <div class="photo-meta">
+                <div class="photo-date-row">
+                  <span class="photo-date">Dec 6, 2025</span>
+                  <span class="photo-season-tag">2025 · Unearthed</span>
+                </div>
+                <p class="photo-caption">Botzilla team, coaches, and families celebrating their awards in front of the FIRST banner.</p>
+              </div>
+            </article>
 
-        <article class="photo-card" data-filename="IMG-20251206-WA0060.jpg">
-          <div class="photo-frame">
-            <img src="IMG-20251206-WA0060.jpg" alt="Team Botzilla, coaches, and families celebrating with trophies in front of the FIRST banner" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            <div class="photo-fallback">Photo file:<br /><code>IMG-20251206-WA0060.jpg</code></div>
-          </div>
-          <div class="photo-meta">
-            <div class="photo-date-row">
-              <span class="photo-date">Dec 6, 2025</span>
-              <span class="photo-season-tag">2025 · Unearthed</span>
-            </div>
-            <p class="photo-caption">Botzilla team, coaches, and families celebrating their awards in front of the FIRST banner.</p>
-            <span class="photo-file">IMG-20251206-WA0060.jpg</span>
-          </div>
-        </article>
+            <article class="photo-card" data-filename="IMG-20260613-WA0037.jpg">
+              <div class="photo-frame">
+                <img src="IMG-20260613-WA0037.jpg" alt="Botzilla competing at the Open Invitational table" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <div class="photo-fallback">Photo file:<br /><code>IMG-20260613-WA0037.jpg</code></div>
+              </div>
+              <div class="photo-meta">
+                <div class="photo-date-row">
+                  <span class="photo-date">Jun 13, 2026</span>
+                  <span class="photo-season-tag">Open Invitational</span>
+                </div>
+                <p class="photo-caption">Botzilla running robot game missions at the Open Invitational International Tournament.</p>
+              </div>
+            </article>
 
-        <article class="photo-card" data-filename="IMG-20260613-WA0037.jpg">
-          <div class="photo-frame">
-            <img src="IMG-20260613-WA0037.jpg" alt="Botzilla competing at the Open Invitational table" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            <div class="photo-fallback">Photo file:<br /><code>IMG-20260613-WA0037.jpg</code></div>
-          </div>
-          <div class="photo-meta">
-            <div class="photo-date-row">
-              <span class="photo-date">Jun 13, 2026</span>
-              <span class="photo-season-tag">Open Invitational</span>
-            </div>
-            <p class="photo-caption">Botzilla running robot game missions at the Open Invitational International Tournament.</p>
-            <span class="photo-file">IMG-20260613-WA0037.jpg</span>
-          </div>
-        </article>
+            <article class="photo-card" data-filename="IMG-20260614-WA0041.jpg">
+              <div class="photo-frame">
+                <img src="IMG-20260614-WA0041.jpg" alt="Botzilla team and families at the Open Invitational" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <div class="photo-fallback">Photo file:<br /><code>IMG-20260614-WA0041.jpg</code></div>
+              </div>
+              <div class="photo-meta">
+                <div class="photo-date-row">
+                  <span class="photo-date">Jun 14, 2026</span>
+                  <span class="photo-season-tag">Open Invitational</span>
+                </div>
+                <p class="photo-caption">Team Botzilla, coaches, and supporters together in Botzilla red shirts.</p>
+              </div>
+            </article>
 
-        <article class="photo-card" data-filename="IMG-20260614-WA0041.jpg">
-          <div class="photo-frame">
-            <img src="IMG-20260614-WA0041.jpg" alt="Botzilla team and families at the Open Invitational" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            <div class="photo-fallback">Photo file:<br /><code>IMG-20260614-WA0041.jpg</code></div>
+            <article class="photo-card" data-filename="IMG-20260614-WA0042.jpg">
+              <div class="photo-frame">
+                <img src="IMG-20260614-WA0042.jpg" alt="Botzilla team members smiling together at the Open Invitational" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <div class="photo-fallback">Photo file:<br /><code>IMG-20260614-WA0042.jpg</code></div>
+              </div>
+              <div class="photo-meta">
+                <div class="photo-date-row">
+                  <span class="photo-date">Jun 14, 2026</span>
+                  <span class="photo-season-tag">Open Invitational</span>
+                </div>
+                <p class="photo-caption">All five Botzilla teammates celebrating together at the Open Invitational.</p>
+              </div>
+            </article>
           </div>
-          <div class="photo-meta">
-            <div class="photo-date-row">
-              <span class="photo-date">Jun 14, 2026</span>
-              <span class="photo-season-tag">Open Invitational</span>
-            </div>
-            <p class="photo-caption">Team Botzilla, coaches, and supporters together in Botzilla red shirts.</p>
-            <span class="photo-file">IMG-20260614-WA0041.jpg</span>
-          </div>
-        </article>
+        </section>
 
-        <article class="photo-card" data-filename="IMG-20260614-WA0042.jpg">
-          <div class="photo-frame">
-            <img src="IMG-20260614-WA0042.jpg" alt="Botzilla team members smiling together at the Open Invitational" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            <div class="photo-fallback">Photo file:<br /><code>IMG-20260614-WA0042.jpg</code></div>
+        <!-- SWIMLANE 3: 2026 BIOGLOW -->
+        <section class="photo-swimlane" data-swimlane="2026" aria-labelledby="swimlane-2026">
+          <div class="swimlane-header">
+            <h3 class="swimlane-title" id="swimlane-2026">2026 BioGlow Season</h3>
+            <span class="swimlane-dates">Nov 2026</span>
           </div>
-          <div class="photo-meta">
-            <div class="photo-date-row">
-              <span class="photo-date">Jun 14, 2026</span>
-              <span class="photo-season-tag">Open Invitational</span>
-            </div>
-            <p class="photo-caption">All five Botzilla teammates celebrating together at the Open Invitational.</p>
-            <span class="photo-file">IMG-20260614-WA0042.jpg</span>
-          </div>
-        </article>
+          <div class="swimlane-track">
+            <article class="photo-card" data-filename="PXL_20261114_175032153.jpg">
+              <div class="photo-frame">
+                <img src="PXL_20261114_175032153.jpg" alt="Team Botzilla in neon BioGlow shirts presenting Robot Design" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <div class="photo-fallback">Photo file:<br /><code>PXL_20261114_175032153.jpg</code></div>
+              </div>
+              <div class="photo-meta">
+                <div class="photo-date-row">
+                  <span class="photo-date">Nov 14, 2026</span>
+                  <span class="photo-season-tag">2026 · BioGlow</span>
+                </div>
+                <p class="photo-caption">Presenting BioGlow Robot Design and Bot Structure to the judging panel.</p>
+              </div>
+            </article>
 
-        <article class="photo-card" data-filename="PXL_20261114_175032153.jpg">
-          <div class="photo-frame">
-            <img src="PXL_20261114_175032153.jpg" alt="Team Botzilla in neon BioGlow shirts presenting Robot Design" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            <div class="photo-fallback">Photo file:<br /><code>PXL_20261114_175032153.jpg</code></div>
+            <article class="photo-card" data-filename="IMG-20261114-WA0108.jpg">
+              <div class="photo-frame">
+                <img src="IMG-20261114-WA0108.jpg" alt="Team Botzilla in neon BioGlow shirts holding Championship trophies" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <div class="photo-fallback">Photo file:<br /><code>IMG-20261114-WA0108.jpg</code></div>
+              </div>
+              <div class="photo-meta">
+                <div class="photo-date-row">
+                  <span class="photo-date">Nov 14, 2026</span>
+                  <span class="photo-season-tag">2026 · BioGlow</span>
+                </div>
+                <p class="photo-caption">Team Botzilla in neon BioGlow shirts holding their Championship trophies.</p>
+              </div>
+            </article>
           </div>
-          <div class="photo-meta">
-            <div class="photo-date-row">
-              <span class="photo-date">Nov 14, 2026</span>
-              <span class="photo-season-tag">2026 · BioGlow</span>
-            </div>
-            <p class="photo-caption">Presenting BioGlow Robot Design and Bot Structure to the judging panel.</p>
-            <span class="photo-file">PXL_20261114_175032153.jpg</span>
-          </div>
-        </article>
-
-        <article class="photo-card" data-filename="IMG-20261114-WA0108.jpg">
-          <div class="photo-frame">
-            <img src="IMG-20261114-WA0108.jpg" alt="Team Botzilla in neon BioGlow shirts holding Championship trophies" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            <div class="photo-fallback">Photo file:<br /><code>IMG-20261114-WA0108.jpg</code></div>
-          </div>
-          <div class="photo-meta">
-            <div class="photo-date-row">
-              <span class="photo-date">Nov 14, 2026</span>
-              <span class="photo-season-tag">2026 · BioGlow</span>
-            </div>
-            <p class="photo-caption">Team Botzilla in neon BioGlow shirts holding their Championship trophies.</p>
-            <span class="photo-file">IMG-20261114-WA0108.jpg</span>
-          </div>
-        </article>
+        </section>
       </div>
     </section>
 
@@ -1394,6 +1462,17 @@
           <span class="email-address" id="team-email">24thbotzilla@gmail.com</span>
           <a href="mailto:24thbotzilla@gmail.com" class="btn btn-primary" style="margin-left: auto;">Send Email</a>
           <button type="button" class="btn btn-secondary" id="copy-email-btn">Copy Email</button>
+          <a href="mailto:24thbotzilla@gmail.com?subject=Kudos%20to%20Team%20Botzilla%20%2367850!&amp;body=Hi%20Team%20Botzilla%20%26%20Coach%20Rajesh%2C%0A%0AI%20wanted%20to%20share%20some%20kudos%20and%20appreciation%20for%20the%20amazing%20work%20you%20do%20in%20FIRST%20LEGO%20League%20Challenge!%0A%0A" class="btn btn-glow">Send Kudos</a>
+        </div>
+
+        <h3 style="margin-top: 24px;">Coach Email</h3>
+        <p style="color: var(--muted); font-size: 15px; margin-bottom: 0;">
+          Reach Coach Rajesh Ninganola directly:
+        </p>
+
+        <div class="email-row">
+          <span class="email-address">nraj13@gmail.com</span>
+          <a href="mailto:nraj13@gmail.com" class="btn btn-primary" style="margin-left: auto;">Send Email</a>
         </div>
 
         <p style="font-size: 13px; color: var(--muted); margin: 0;">
