@@ -1,0 +1,1511 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Botzilla #67850 | FIRST LEGO League Challenge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f3f7ff;
+      --surface: #ffffff;
+      --surface-alt: #eef4ff;
+      --border: #dbe6f7;
+      --ink: #0b132b;
+      --muted: #475569;
+      --brand: #0ea5e9;
+      --brand-dark: #0369a1;
+      --brand-soft: #e0f2fe;
+      --glow-lime: #84cc16;
+      --glow-lime-bright: #bef264;
+      --glow-cyan: #06b6d4;
+      --glow-violet: #8b5cf6;
+      --glow-pink: #ec4899;
+      --gold: #facc15;
+      --gold-soft: #fef9c3;
+      --gold-ink: #854d0e;
+      --teal: #0d9488;
+      --teal-soft: #ccfbf1;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 4px 16px rgba(11, 19, 43, 0.06), 0 1px 3px rgba(11, 19, 43, 0.05);
+      --shadow-lg: 0 14px 36px rgba(6, 182, 212, 0.18), 0 6px 18px rgba(139, 92, 246, 0.14);
+      --font: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(6, 182, 212, 0.12), transparent 34%),
+        radial-gradient(circle at 92% 10%, rgba(132, 204, 22, 0.12), transparent 32%),
+        radial-gradient(circle at 50% 100%, rgba(139, 92, 246, 0.08), transparent 40%),
+        var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--brand-dark);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Header & Navigation */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(11, 19, 43, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid rgba(34, 211, 238, 0.35);
+      color: #ffffff;
+    }
+
+    .header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 12px var(--space-6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font: inherit;
+      color: inherit;
+      text-align: left;
+    }
+
+    .brand-logo-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--glow-lime-bright);
+      background: #ffffff;
+      box-shadow: 0 0 14px rgba(190, 242, 100, 0.45);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .brand-logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .brand-logo-fallback {
+      font-family: var(--mono);
+      font-weight: 800;
+      font-size: 13px;
+      color: #0b132b;
+      display: none;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .brand-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .brand-name {
+      font-weight: 800;
+      font-size: 19px;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    .team-num-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--glow-cyan), var(--brand));
+      color: #ffffff;
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 12px;
+      white-space: nowrap;
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.45);
+    }
+
+    .brand-sub {
+      font-size: 12px;
+      color: #bae6fd;
+      font-weight: 500;
+    }
+
+    .nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      font: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 9px 15px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: #cbd5e1;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease, transform 0.12s ease;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    .nav-btn[aria-current="page"] {
+      background: linear-gradient(135deg, var(--glow-lime-bright), var(--glow-cyan));
+      color: #0b132b;
+      font-weight: 700;
+      box-shadow: 0 0 16px rgba(190, 242, 100, 0.35);
+    }
+
+    .nav-btn:focus-visible,
+    .btn:focus-visible,
+    .season-pill:focus-visible {
+      outline: 2px solid var(--glow-lime-bright);
+      outline-offset: 2px;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: var(--space-8) var(--space-6) var(--space-12);
+    }
+
+    .page-section {
+      display: none;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero Banner (BioGlow) */
+    .hero {
+      background: linear-gradient(135deg, #0b132b 0%, #162447 45%, #0e7490 82%, #4d7c0f 100%);
+      color: #ffffff;
+      border-radius: 22px;
+      padding: clamp(28px, 5vw, 48px);
+      margin-bottom: var(--space-8);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(190, 242, 100, 0.3);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: var(--space-6);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(190, 242, 100, 0.16);
+      border: 1px solid rgba(190, 242, 100, 0.45);
+      color: var(--glow-lime-bright);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: var(--space-4);
+    }
+
+    .hero h1 {
+      margin: 0 0 var(--space-3);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .hero p {
+      margin: 0 0 var(--space-6);
+      max-width: 660px;
+      color: #e0f2fe;
+      font-size: 16px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+
+    .hero-logo-card {
+      width: 156px;
+      height: 156px;
+      border-radius: 50%;
+      background: #ffffff;
+      padding: 6px;
+      border: 3px solid var(--glow-lime-bright);
+      box-shadow: 0 0 28px rgba(190, 242, 100, 0.4), 0 0 40px rgba(6, 182, 212, 0.25);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .hero-logo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .hero-logo-fallback {
+      display: none;
+      text-align: center;
+      font-weight: 800;
+      color: #0b132b;
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    /* Buttons */
+    .btn {
+      font: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 11px 18px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.12s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand), var(--glow-violet));
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.35);
+      text-decoration: none;
+    }
+
+    .btn-glow {
+      background: var(--glow-lime-bright);
+      color: #0b132b;
+      font-weight: 700;
+    }
+
+    .btn-glow:hover {
+      background: #d9f99d;
+      text-decoration: none;
+    }
+
+    .btn-outline-light {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .btn-outline-light:hover {
+      background: rgba(255, 255, 255, 0.22);
+      text-decoration: none;
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--ink);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface-alt);
+      text-decoration: none;
+    }
+
+    /* Cards & Grids */
+    .section-header {
+      margin-bottom: var(--space-6);
+    }
+
+    .section-header h2 {
+      margin: 0 0 6px;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #0b132b 0%, #0284c7 60%, #65a30d 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-6);
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--glow-cyan);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: var(--space-6);
+    }
+
+    .card.lime-accent {
+      border-top-color: var(--glow-lime);
+    }
+
+    .card h3 {
+      margin: 0 0 var(--space-3);
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    /* Roster & Coach */
+    .member-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: var(--space-3);
+      margin-top: var(--space-4);
+    }
+
+    .member-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      background: linear-gradient(135deg, #f0f9ff, #f7fee7);
+      border: 1px solid #bae6fd;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--ink);
+    }
+
+    .member-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--glow-cyan), var(--glow-violet));
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .coach-card {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-4);
+      background: linear-gradient(135deg, #ecfeff, #ecfccb);
+      border: 1px solid #a5f3fc;
+      border-radius: var(--radius-sm);
+      margin-top: var(--space-4);
+    }
+
+    .coach-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0d9488, #65a30d);
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* Acronym Core Values */
+    .acronym-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+    }
+
+    .acronym-item {
+      padding: 10px 12px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .acronym-item span {
+      color: var(--brand-dark);
+      font-weight: 800;
+      font-family: var(--mono);
+      margin-right: 4px;
+    }
+
+    /* Season Filter Pills */
+    .season-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-bottom: var(--space-6);
+    }
+
+    .season-pill {
+      font: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .season-pill:hover {
+      border-color: var(--glow-cyan);
+      color: var(--brand-dark);
+    }
+
+    .season-pill.active {
+      background: linear-gradient(135deg, #0b132b, #0e7490);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 2px 10px rgba(14, 116, 144, 0.25);
+    }
+
+    /* Season Cards */
+    .season-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .season-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .season-card[data-season="2026"] {
+      border-top: 5px solid var(--glow-lime);
+    }
+
+    .season-card[data-season="2025"] {
+      border-top: 5px solid var(--glow-violet);
+    }
+
+    .season-card[data-season="2024"] {
+      border-top: 5px solid var(--glow-cyan);
+    }
+
+    .season-card.hidden {
+      display: none;
+    }
+
+    .season-top {
+      padding: var(--space-6);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-4);
+      background: linear-gradient(to right, #ffffff, #f0f9ff);
+    }
+
+    .season-year {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--brand-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .season-title {
+      margin: 4px 0 6px;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .award-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: var(--space-2);
+    }
+
+    .award-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      background: var(--gold-soft);
+      color: var(--gold-ink);
+      border: 1px solid #fde047;
+    }
+
+    .award-badge.qual {
+      background: var(--teal-soft);
+      color: #115e59;
+      border-color: #5eead4;
+    }
+
+    .season-body {
+      padding: var(--space-6);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-6);
+    }
+
+    .detail-block h4 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--brand-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .detail-block p {
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .detail-block ul {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .detail-block li {
+      margin-bottom: 6px;
+    }
+
+    .stat-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-top: var(--space-3);
+    }
+
+    .stat-box {
+      background: linear-gradient(135deg, #f0f9ff, #f7fee7);
+      border: 1px solid #bae6fd;
+      border-radius: 10px;
+      padding: 10px 14px;
+      min-width: 120px;
+    }
+
+    .stat-val {
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--ink);
+    }
+
+    .stat-lbl {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Photos Gallery */
+    .photo-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: var(--space-4) var(--space-6);
+      background: linear-gradient(135deg, #ecfeff, #f7fee7);
+      border: 1px solid #a5f3fc;
+      border-radius: var(--radius);
+      margin-bottom: var(--space-6);
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-6);
+    }
+
+    .photo-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .photo-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: linear-gradient(135deg, #0b132b, #164e63);
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-fallback {
+      display: none;
+      padding: var(--space-4);
+      text-align: center;
+      color: #e0f2fe;
+      font-size: 13px;
+    }
+
+    .photo-fallback code {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.14);
+      color: var(--glow-lime-bright);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .photo-meta {
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .photo-date-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .photo-date {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--brand-dark);
+    }
+
+    .photo-season-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--teal-soft);
+      color: #115e59;
+    }
+
+    .photo-caption {
+      margin: 0;
+      font-size: 14px;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .photo-file {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* Contact Card */
+    .contact-panel {
+      max-width: 680px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 5px solid var(--glow-cyan);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: var(--space-8);
+    }
+
+    .email-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-4);
+      background: linear-gradient(135deg, #f0f9ff, #f7fee7);
+      border: 1px solid #bae6fd;
+      border-radius: 12px;
+      margin: var(--space-4) 0;
+    }
+
+    .email-address {
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      word-break: break-all;
+    }
+
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      background: #0b132b;
+      color: #cbd5e1;
+      padding: var(--space-6);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .site-footer a {
+      color: var(--glow-lime-bright);
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: left;
+      }
+      .hero-logo-card {
+        width: 112px;
+        height: 112px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-inner {
+        padding: 12px var(--space-4);
+      }
+      .container {
+        padding: var(--space-6) var(--space-4) var(--space-8);
+      }
+      .nav-tabs {
+        width: 100%;
+      }
+      .nav-btn {
+        flex: 1;
+        text-align: center;
+        padding: 8px 8px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <button type="button" class="brand" data-page-target="about" aria-label="Botzilla Team 67850 Home">
+        <span class="brand-logo-wrap">
+          <img src="IMG-20261113-WA0034.jpg" alt="Botzilla #67850 Logo" class="brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <span class="brand-logo-fallback">BZ</span>
+        </span>
+        <span class="brand-text">
+          <span class="brand-title-row">
+            <span class="brand-name">@BOTZILLA</span>
+            <span class="team-num-pill">#67850</span>
+          </span>
+          <span class="brand-sub">FIRST LEGO League Challenge</span>
+        </span>
+      </button>
+
+      <nav class="nav-tabs" aria-label="Primary Navigation">
+        <button type="button" class="nav-btn" data-page-target="about" aria-current="page">About Botzilla</button>
+        <button type="button" class="nav-btn" data-page-target="seasons">Seasons &amp; Performances</button>
+        <button type="button" class="nav-btn" data-page-target="photos">Photos</button>
+        <button type="button" class="nav-btn" data-page-target="contact">Contact Us</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- PAGE 1: ABOUT BOTZILLA TEAM -->
+    <section id="page-about" class="page-section active" aria-labelledby="about-heading">
+      <div class="hero">
+        <div>
+          <div class="hero-badge">Team #67850 · FIRST LEGO League Challenge</div>
+          <h1 id="about-heading">Meet Team Botzilla</h1>
+          <p>
+            We are FIRST LEGO League Challenge Team #67850—designing autonomous LEGO robots, solving real-world
+            science and engineering problems through our Innovation Projects, and growing together across the
+            2024 Submerged, 2025 Unearthed, and 2026 BioGlow seasons.
+          </p>
+          <div class="hero-actions">
+            <button type="button" class="btn btn-glow" data-page-target="seasons">Explore Seasons &amp; Awards</button>
+            <button type="button" class="btn btn-outline-light" data-page-target="photos">View Team Photos</button>
+            <button type="button" class="btn btn-outline-light" data-page-target="contact">Get in Touch</button>
+          </div>
+        </div>
+        <div class="hero-logo-card">
+          <img src="IMG-20261113-WA0034.jpg" alt="Team Botzilla #67850 Official Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <div class="hero-logo-fallback">@BOTZILLA<br />#67850</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card lime-accent">
+          <h3>Team Members</h3>
+          <p style="margin: 0; color: var(--muted); font-size: 14px;">
+            Our team members collaborate across robot design, programming, research, and presentations—rotating
+            responsibilities each season as we learn and grow together.
+          </p>
+          <div class="member-grid" aria-label="Botzilla Team Members">
+            <div class="member-chip"><span class="member-avatar">PK</span>Poshya Sai Kunchakuri</div>
+            <div class="member-chip"><span class="member-avatar">SA</span>Siddharth Andaloori</div>
+            <div class="member-chip"><span class="member-avatar">AA</span>Ayaansh Aggarwal</div>
+            <div class="member-chip"><span class="member-avatar">DK</span>Dhruv Khurana</div>
+            <div class="member-chip"><span class="member-avatar">SS</span>Srimanya Sarikonda</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Team Coach &amp; Core Values</h3>
+          <div class="coach-card">
+            <div class="coach-badge">RN</div>
+            <div>
+              <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--teal); letter-spacing: 0.04em;">Head Coach</div>
+              <div style="font-size: 18px; font-weight: 800; color: var(--ink);">Rajesh Ninganola</div>
+              <div style="font-size: 13px; color: var(--muted);">Recipient of the Best Coach Award at the 2024 State Championship</div>
+            </div>
+          </div>
+
+          <h4 style="margin: 20px 0 4px; font-size: 14px; color: var(--ink);">What B.O.T.Z.I.L.L.A. Stands For</h4>
+          <div class="acronym-list">
+            <div class="acronym-item"><span>B</span>right</div>
+            <div class="acronym-item"><span>O</span>ptimistic</div>
+            <div class="acronym-item"><span>T</span>houghtful</div>
+            <div class="acronym-item"><span>Z</span>ealous</div>
+            <div class="acronym-item"><span>I</span>nnovative</div>
+            <div class="acronym-item"><span>L</span>oyal</div>
+            <div class="acronym-item"><span>L</span>eadership</div>
+            <div class="acronym-item"><span>A</span>mbitious</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 2: SEASONS AND PERFORMANCES -->
+    <section id="page-seasons" class="page-section" aria-labelledby="seasons-heading">
+      <div class="section-header">
+        <h2 id="seasons-heading">Seasons &amp; Performances (2024–2026)</h2>
+        <p>Competition milestones, Innovation Projects, specialist research, and Robot Design across three FLL Challenge seasons.</p>
+      </div>
+
+      <div class="season-bar" role="tablist" aria-label="Filter by Season">
+        <button type="button" class="season-pill active" data-season-filter="all">All Seasons</button>
+        <button type="button" class="season-pill" data-season-filter="2026">2026 · BioGlow</button>
+        <button type="button" class="season-pill" data-season-filter="2025">2025 · Unearthed</button>
+        <button type="button" class="season-pill" data-season-filter="2024">2024 · Submerged</button>
+      </div>
+
+      <div class="season-stack">
+        <!-- 2026 BIOGLOW -->
+        <article class="season-card" data-season="2026">
+          <div class="season-top">
+            <div>
+              <div class="season-year">2026 Season</div>
+              <h3 class="season-title">BioGlow</h3>
+              <div class="award-list">
+                <span class="award-badge">🏆 1st Championship — Qualifiers</span>
+                <span class="award-badge qual">✓ Qualified to State Championship</span>
+              </div>
+            </div>
+          </div>
+          <div class="season-body">
+            <div class="detail-block">
+              <h4>Innovation Project: VMD Thermosolar Hives</h4>
+              <p>
+                <strong>Problem:</strong> Over 60% of honeybees are affected by varroa mites—the #1 cause of honeybee deaths—killing
+                ~50% of affected bees (~1.65 million colonies / ~49.5 billion bees dying in the U.S. each season) and threatening
+                pollination (-90% pollination rate) and food supply (-20%).
+              </p>
+              <p>
+                <strong>Solution:</strong> The <strong>VMD Thermosolar Hive</strong> is a non-chemical, transferable smart-hive system
+                powered by solar panels (with USB-C backup). Internal AI camera sensors, motion sensors, and thermal sensors monitor
+                bees for mites and trigger a bottom heater to raise the hive temperature to <strong>104°F</strong>—deadly to varroa mites
+                while safe for bees, honey, and wax—dropping dead mites into a bottom collecting tray.
+              </p>
+              <p>
+                <strong>Specialist Research:</strong> Consulted 8 specialists including Mr. Randy Oliver, Mr. Maben (beeswax frames &amp;
+                farm testing), Mr. Ternlund (bottom heater placement near brood cells &amp; distributed thermal sensors), Ms. Kirby,
+                Mr. Martin, Mr. Hayes, Ms. Heck, Ms. Mccormack, and Mr. Paul.
+              </p>
+            </div>
+            <div class="detail-block">
+              <h4>Robot Design &amp; Strategy</h4>
+              <ul>
+                <li><strong>Chassis &amp; Balance:</strong> Rectangular frame with upward-facing front motors (for fast attachment swaps), rear hub for balanced weight, and large smooth wheels.</li>
+                <li><strong>Sensors &amp; Code:</strong> Programmed in <strong>SPIKE Prime</strong> word blocks using a <strong>gyro sensor</strong> for speed-calibrated turns and automatic obstacle re-centering.</li>
+                <li><strong>Attachments &amp; Runs:</strong> Combined passive and motorized attachments (including combining Missions 2, 4, 5, 8, and 9 into one run, plus a slide-under passive attachment for Mission 9 Research Platform) with built-in failsafes and testing logs.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2025 UNEARTHED -->
+        <article class="season-card" data-season="2025">
+          <div class="season-top">
+            <div>
+              <div class="season-year">2025 Season</div>
+              <h3 class="season-title">Unearthed</h3>
+              <div class="award-list">
+                <span class="award-badge">🏆 1st Place Robot Performance — Qualifiers</span>
+                <span class="award-badge">🏆 1st Place Robot Design — Qualifiers</span>
+                <span class="award-badge">🥈 2nd Place Innovation — State Championship</span>
+                <span class="award-badge qual">🌍 Top 6 · Open Invitational International Tournaments</span>
+              </div>
+            </div>
+          </div>
+          <div class="season-body">
+            <div class="detail-block">
+              <h4>Innovation Project: ArcheoConnect &amp; Godzilla 2.0 Rover</h4>
+              <p>
+                <strong>Problem:</strong> Analyzing an archaeological artifact typically takes at least 3 weeks (and longer in
+                hard-to-reach mountains, deserts, or caves), with ~90% of found artifacts already known.
+              </p>
+              <p>
+                <strong>Solution:</strong> Built <strong>ArcheoConnect</strong> with Replit AI—featuring global artifact search,
+                live AI camera analysis ("Auto Click" identifying artifacts in seconds, 3,600× faster and saving 75–90% of analysis time),
+                multilingual real-time translated group chats with an AI gatekeeper, and "Submit Discovery" alerts. Paired with
+                <strong>Godzilla 2.0</strong>, an all-terrain rover with smartphone live camera feed, lights, sensors, claws, and GPS alerts.
+              </p>
+              <p>
+                <strong>Specialist Research:</strong> Consulted <strong>Dr. Holly Norton</strong> (Colorado State Archaeologist, History
+                Colorado) and <strong>Mr. Scott Ortman</strong> (Director, Center for Collaborative Synthesis in Archaeology, CU Boulder),
+                plus visited the Denver Historical Museum.
+              </p>
+            </div>
+            <div class="detail-block">
+              <h4>Robot Design &amp; Strategy</h4>
+              <ul>
+                <li><strong>Bot &amp; Code:</strong> Compact 5" × 6" × 3½" (4.1" height) box-shaped robot with front motors and rear hub/wheels. Upgraded from word blocks to <strong>Pybricks (Python)</strong> with <code>use_gyro=True</code>, <code>async()</code>, and testing logs targeting &gt;90% run consistency.</li>
+                <li><strong>Improvements:</strong> Replaced slipping gears with direct motors; built 8 reusable/pinless attachments (including 2 multipurpose attachments completing 8 missions) and failsafe runs across 15 table missions.</li>
+              </ul>
+              <div class="stat-strip">
+                <div class="stat-box"><div class="stat-val">3,600×</div><div class="stat-lbl">Faster ID</div></div>
+                <div class="stat-box"><div class="stat-val">90%+</div><div class="stat-lbl">Run Consistency</div></div>
+                <div class="stat-box"><div class="stat-val">15</div><div class="stat-lbl">Table Missions</div></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2024 SUBMERGED -->
+        <article class="season-card" data-season="2024">
+          <div class="season-top">
+            <div>
+              <div class="season-year">2024 Season</div>
+              <h3 class="season-title">Submerged</h3>
+              <div class="award-list">
+                <span class="award-badge">🏆 1st Place Robot Design — Qualifiers</span>
+                <span class="award-badge">🤝 Peer Award — Qualifiers</span>
+                <span class="award-badge">⭐ Best Coach Award — State Championship</span>
+                <span class="award-badge qual">✓ Qualified to State Championship</span>
+              </div>
+            </div>
+          </div>
+          <div class="season-body">
+            <div class="detail-block">
+              <h4>Innovation Project: AMR Godzilla (Ghost Net Retrieval)</h4>
+              <p>
+                <strong>Problem:</strong> Lost fishing gear ("ghost nets") harm marine life and scuba divers—killing ~650,000 marine
+                animals annually, with 500,000–600,000 tons abandoned each year and only ~1% (~300 nets) recovered.
+              </p>
+              <p>
+                <strong>Solution:</strong> Designed <strong>AMR (Autonomous Marine Robot) – Godzilla</strong>, a 3D-printed autonomous
+                marine vehicle with interior sonar-based scanning and a shredder + barrel container, plus exterior 6–8 claws, an airlock,
+                and an upgraded camera and light for detection.
+              </p>
+              <p>
+                <strong>Specialist Research:</strong> Consulted <strong>Dr. Sandhya K.M.</strong> (Senior Scientist, Fishing Technology)
+                and <strong>Prof. Arthur Trembanis</strong> (Professor of Marine Science and Policy, University of Delaware).
+              </p>
+            </div>
+            <div class="detail-block">
+              <h4>Robot Design &amp; Mission Runs</h4>
+              <ul>
+                <li><strong>Attachment Efficiency:</strong> Combined motorized attachments (for complex missions) and passive attachments (freeing up motorized ports in the same run), reusable across multiple missions to save pitstop time.</li>
+                <li><strong>Mission Runs (Runs 0–6):</strong> Structured by mission difficulty and distance from home area—covering Seabed Sample, Unexpected Encounter, Plankton &amp; Water Sample, Mission 15 Drop, and Shark Drop.</li>
+              </ul>
+              <div class="stat-strip">
+                <div class="stat-box"><div class="stat-val">380 pts</div><div class="stat-lbl">Total Score</div></div>
+                <div class="stat-box"><div class="stat-val">305 + 20 + 55</div><div class="stat-lbl">Runs / Insp. / Prec.</div></div>
+                <div class="stat-box"><div class="stat-val">7 Runs</div><div class="stat-lbl">Run 0 – Run 6</div></div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PAGE 3: PHOTOS -->
+    <section id="page-photos" class="page-section" aria-labelledby="photos-heading">
+      <div class="section-header">
+        <h2 id="photos-heading">Team Photos (2024–2026)</h2>
+        <p>Organized chronologically by the date each photo was taken across Submerged, Unearthed, Open Invitational, and BioGlow.</p>
+      </div>
+
+      <div class="photo-toolbar">
+        <div style="font-size: 13px; color: var(--ink);">
+          <strong>Hosting tip:</strong> Place your photo files in the same folder as <code>index.html</code>, or select them here to preview immediately:
+        </div>
+        <label class="btn btn-primary" style="margin: 0; cursor: pointer;">
+          Load Local Photos
+          <input type="file" id="photo-picker" accept="image/*" multiple style="display: none;" />
+        </label>
+      </div>
+
+      <div class="photo-grid" id="photo-grid">
+        <article class="photo-card" data-filename="IMG-20241117-WA0041.jpg">
+          <div class="photo-frame">
+            <img src="IMG-20241117-WA0041.jpg" alt="Team Botzilla collaborating around a laptop during 2024 Submerged prep" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="photo-fallback">Photo file:<br /><code>IMG-20241117-WA0041.jpg</code></div>
+          </div>
+          <div class="photo-meta">
+            <div class="photo-date-row">
+              <span class="photo-date">Nov 17, 2024</span>
+              <span class="photo-season-tag">2024 · Submerged</span>
+            </div>
+            <p class="photo-caption">Team Botzilla brainstorming and coding together during Submerged season prep.</p>
+            <span class="photo-file">IMG-20241117-WA0041.jpg</span>
+          </div>
+        </article>
+
+        <article class="photo-card" data-filename="IMG-20241123-WA0028.jpg">
+          <div class="photo-frame">
+            <img src="IMG-20241123-WA0028.jpg" alt="Team Botzilla with coaches holding the 2024 Submerged trophy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="photo-fallback">Photo file:<br /><code>IMG-20241123-WA0028.jpg</code></div>
+          </div>
+          <div class="photo-meta">
+            <div class="photo-date-row">
+              <span class="photo-date">Nov 23, 2024</span>
+              <span class="photo-season-tag">2024 · Submerged</span>
+            </div>
+            <p class="photo-caption">Team Botzilla and coaches celebrating with their FIRST LEGO League Challenge trophy.</p>
+            <span class="photo-file">IMG-20241123-WA0028.jpg</span>
+          </div>
+        </article>
+
+        <article class="photo-card" data-filename="IMG-20241123-WA0051.jpg">
+          <div class="photo-frame">
+            <img src="IMG-20241123-WA0051.jpg" alt="Team Botzilla cheering with their Submerged robot" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="photo-fallback">Photo file:<br /><code>IMG-20241123-WA0051.jpg</code></div>
+          </div>
+          <div class="photo-meta">
+            <div class="photo-date-row">
+              <span class="photo-date">Nov 23, 2024</span>
+              <span class="photo-season-tag">2024 · Submerged</span>
+            </div>
+            <p class="photo-caption">Botzilla teammates cheering with their Submerged robot at the 2024 Qualifier.</p>
+            <span class="photo-file">IMG-20241123-WA0051.jpg</span>
+          </div>
+        </article>
+
+        <article class="photo-card" data-filename="IMG-20241206-WA0062.jpg">
+          <div class="photo-frame">
+            <img src="IMG-20241206-WA0062.jpg" alt="Team Botzilla with Coach Rajesh Ninganola and Submerged robot" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="photo-fallback">Photo file:<br /><code>IMG-20241206-WA0062.jpg</code></div>
+          </div>
+          <div class="photo-meta">
+            <div class="photo-date-row">
+              <span class="photo-date">Dec 6, 2024</span>
+              <span class="photo-season-tag">2024 · Submerged</span>
+            </div>
+            <p class="photo-caption">Team Botzilla practicing with Coach Rajesh Ninganola on the Submerged field mat.</p>
+            <span class="photo-file">IMG-20241206-WA0062.jpg</span>
+          </div>
+        </article>
+
+        <article class="photo-card" data-filename="20241207_114349.jpg">
+          <div class="photo-frame">
+            <img src="20241207_114349.jpg" alt="Team Botzilla at 2024 Submerged Qualifier with R2-D2" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="photo-fallback">Photo file:<br /><code>20241207_114349.jpg</code></div>
+          </div>
+          <div class="photo-meta">
+            <div class="photo-date-row">
+              <span class="photo-date">Dec 7, 2024 · 11:43 AM</span>
+              <span class="photo-season-tag">2024 · Submerged</span>
+            </div>
+            <p class="photo-caption">Team Botzilla meeting R2-D2 at the 2024 Submerged Qualifier.</p>
+            <span class="photo-file">20241207_114349.jpg</span>
+          </div>
+        </article>
+
+        <article class="photo-card" data-filename="PXL_20251026_173822075.jpg">
+          <div class="photo-frame">
+            <img src="PXL_20251026_173822075.jpg" alt="Team Botzilla with Dr. Holly Norton, Innovation Project board, and Godzilla 2.0 rover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="photo-fallback">Photo file:<br /><code>PXL_20251026_173822075.jpg</code></div>
+          </div>
+          <div class="photo-meta">
+            <div class="photo-date-row">
+              <span class="photo-date">Oct 26, 2025</span>
+              <span class="photo-season-tag">2025 · Unearthed</span>
+            </div>
+            <p class="photo-caption">Specialist visit with Dr. Holly Norton, the Innovation Project board, and Godzilla 2.0 rover.</p>
+            <span class="photo-file">PXL_20251026_173822075.jpg</span>
+          </div>
+        </article>
+
+        <article class="photo-card" data-filename="IMG-20251108-WA0092.jpg">
+          <div class="photo-frame">
+            <img src="IMG-20251108-WA0092.jpg" alt="Team Botzilla on the bleachers with trophies at the 2025 Unearthed Qualifier" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="photo-fallback">Photo file:<br /><code>IMG-20251108-WA0092.jpg</code></div>
+          </div>
+          <div class="photo-meta">
+            <div class="photo-date-row">
+              <span class="photo-date">Nov 8, 2025</span>
+              <span class="photo-season-tag">2025 · Unearthed</span>
+            </div>
+            <p class="photo-caption">Team Botzilla celebrating with their trophies on the bleachers at the 2025 Unearthed Qualifier.</p>
+            <span class="photo-file">IMG-20251108-WA0092.jpg</span>
+          </div>
+        </article>
+
+        <article class="photo-card" data-filename="PXL_20251206_183107619.MP.jpg">
+          <div class="photo-frame">
+            <img src="PXL_20251206_183107619.MP.jpg" alt="Botzilla team members with R2-D2 at 2025 Unearthed Qualifier" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="photo-fallback">Photo file:<br /><code>PXL_20251206_183107619.MP.jpg</code></div>
+          </div>
+          <div class="photo-meta">
+            <div class="photo-date-row">
+              <span class="photo-date">Dec 6, 2025 · 6:31 PM</span>
+              <span class="photo-season-tag">2025 · Unearthed</span>
+            </div>
+            <p class="photo-caption">Checking out R2-D2 on the competition floor during the 2025 Unearthed Qualifier.</p>
+            <span class="photo-file">PXL_20251206_183107619.MP.jpg</span>
+          </div>
+        </article>
+
+        <article class="photo-card" data-filename="PXL_20251206_234452888.jpg">
+          <div class="photo-frame">
+            <img src="PXL_20251206_234452888.jpg" alt="Team Botzilla holding LEGO trophy and FLL medals" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="photo-fallback">Photo file:<br /><code>PXL_20251206_234452888.jpg</code></div>
+          </div>
+          <div class="photo-meta">
+            <div class="photo-date-row">
+              <span class="photo-date">Dec 6, 2025 · 11:44 PM</span>
+              <span class="photo-season-tag">2025 · Unearthed</span>
+            </div>
+            <p class="photo-caption">Celebrating with the LEGO trophy and FLL medals in front of the FIRST banner.</p>
+            <span class="photo-file">PXL_20251206_234452888.jpg</span>
+          </div>
+        </article>
+
+        <article class="photo-card" data-filename="IMG-20251206-WA0049.jpg">
+          <div class="photo-frame">
+            <img src="IMG-20251206-WA0049.jpg" alt="Team Botzilla holding two LEGO trophies and medals in front of the FIRST banner" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="photo-fallback">Photo file:<br /><code>IMG-20251206-WA0049.jpg</code></div>
+          </div>
+          <div class="photo-meta">
+            <div class="photo-date-row">
+              <span class="photo-date">Dec 6, 2025</span>
+              <span class="photo-season-tag">2025 · Unearthed</span>
+            </div>
+            <p class="photo-caption">Holding up two LEGO trophies and FLL medals at the 2025 Unearthed tournament.</p>
+            <span class="photo-file">IMG-20251206-WA0049.jpg</span>
+          </div>
+        </article>
+
+        <article class="photo-card" data-filename="IMG-20251206-WA0060.jpg">
+          <div class="photo-frame">
+            <img src="IMG-20251206-WA0060.jpg" alt="Team Botzilla, coaches, and families celebrating with trophies in front of the FIRST banner" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="photo-fallback">Photo file:<br /><code>IMG-20251206-WA0060.jpg</code></div>
+          </div>
+          <div class="photo-meta">
+            <div class="photo-date-row">
+              <span class="photo-date">Dec 6, 2025</span>
+              <span class="photo-season-tag">2025 · Unearthed</span>
+            </div>
+            <p class="photo-caption">Botzilla team, coaches, and families celebrating their awards in front of the FIRST banner.</p>
+            <span class="photo-file">IMG-20251206-WA0060.jpg</span>
+          </div>
+        </article>
+
+        <article class="photo-card" data-filename="IMG-20260613-WA0037.jpg">
+          <div class="photo-frame">
+            <img src="IMG-20260613-WA0037.jpg" alt="Botzilla competing at the Open Invitational table" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="photo-fallback">Photo file:<br /><code>IMG-20260613-WA0037.jpg</code></div>
+          </div>
+          <div class="photo-meta">
+            <div class="photo-date-row">
+              <span class="photo-date">Jun 13, 2026</span>
+              <span class="photo-season-tag">Open Invitational</span>
+            </div>
+            <p class="photo-caption">Botzilla running robot game missions at the Open Invitational International Tournament.</p>
+            <span class="photo-file">IMG-20260613-WA0037.jpg</span>
+          </div>
+        </article>
+
+        <article class="photo-card" data-filename="IMG-20260614-WA0041.jpg">
+          <div class="photo-frame">
+            <img src="IMG-20260614-WA0041.jpg" alt="Botzilla team and families at the Open Invitational" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="photo-fallback">Photo file:<br /><code>IMG-20260614-WA0041.jpg</code></div>
+          </div>
+          <div class="photo-meta">
+            <div class="photo-date-row">
+              <span class="photo-date">Jun 14, 2026</span>
+              <span class="photo-season-tag">Open Invitational</span>
+            </div>
+            <p class="photo-caption">Team Botzilla, coaches, and supporters together in Botzilla red shirts.</p>
+            <span class="photo-file">IMG-20260614-WA0041.jpg</span>
+          </div>
+        </article>
+
+        <article class="photo-card" data-filename="IMG-20260614-WA0042.jpg">
+          <div class="photo-frame">
+            <img src="IMG-20260614-WA0042.jpg" alt="Botzilla team members smiling together at the Open Invitational" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="photo-fallback">Photo file:<br /><code>IMG-20260614-WA0042.jpg</code></div>
+          </div>
+          <div class="photo-meta">
+            <div class="photo-date-row">
+              <span class="photo-date">Jun 14, 2026</span>
+              <span class="photo-season-tag">Open Invitational</span>
+            </div>
+            <p class="photo-caption">All five Botzilla teammates celebrating together at the Open Invitational.</p>
+            <span class="photo-file">IMG-20260614-WA0042.jpg</span>
+          </div>
+        </article>
+
+        <article class="photo-card" data-filename="PXL_20261114_175032153.jpg">
+          <div class="photo-frame">
+            <img src="PXL_20261114_175032153.jpg" alt="Team Botzilla in neon BioGlow shirts presenting Robot Design" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="photo-fallback">Photo file:<br /><code>PXL_20261114_175032153.jpg</code></div>
+          </div>
+          <div class="photo-meta">
+            <div class="photo-date-row">
+              <span class="photo-date">Nov 14, 2026</span>
+              <span class="photo-season-tag">2026 · BioGlow</span>
+            </div>
+            <p class="photo-caption">Presenting BioGlow Robot Design and Bot Structure to the judging panel.</p>
+            <span class="photo-file">PXL_20261114_175032153.jpg</span>
+          </div>
+        </article>
+
+        <article class="photo-card" data-filename="IMG-20261114-WA0108.jpg">
+          <div class="photo-frame">
+            <img src="IMG-20261114-WA0108.jpg" alt="Team Botzilla in neon BioGlow shirts holding Championship trophies" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="photo-fallback">Photo file:<br /><code>IMG-20261114-WA0108.jpg</code></div>
+          </div>
+          <div class="photo-meta">
+            <div class="photo-date-row">
+              <span class="photo-date">Nov 14, 2026</span>
+              <span class="photo-season-tag">2026 · BioGlow</span>
+            </div>
+            <p class="photo-caption">Team Botzilla in neon BioGlow shirts holding their Championship trophies.</p>
+            <span class="photo-file">IMG-20261114-WA0108.jpg</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PAGE 4: CONTACT US -->
+    <section id="page-contact" class="page-section" aria-labelledby="contact-heading">
+      <div class="section-header">
+        <h2 id="contact-heading">Contact Botzilla #67850</h2>
+        <p>Reach out to our team and Coach Rajesh Ninganola for FLL collaborations, outreach, or questions.</p>
+      </div>
+
+      <div class="contact-panel">
+        <h3 style="margin-top: 0;">Team Email</h3>
+        <p style="color: var(--muted); font-size: 15px; margin-bottom: 0;">
+          For competition inquiries, specialist connections, or community outreach, email us directly:
+        </p>
+
+        <div class="email-row">
+          <span class="email-address" id="team-email">24thbotzilla@gmail.com</span>
+          <a href="mailto:24thbotzilla@gmail.com" class="btn btn-primary" style="margin-left: auto;">Send Email</a>
+          <button type="button" class="btn btn-secondary" id="copy-email-btn">Copy Email</button>
+        </div>
+
+        <p style="font-size: 13px; color: var(--muted); margin: 0;">
+          FIRST LEGO League Challenge Team #67850 · Coach Rajesh Ninganola
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    Team Botzilla (#67850) · FIRST LEGO League Challenge ·
+    <a href="mailto:24thbotzilla@gmail.com">24thbotzilla@gmail.com</a>
+  </footer>
+
+  <script>
+    (function () {
+      const pages = {
+        about: document.getElementById('page-about'),
+        seasons: document.getElementById('page-seasons'),
+        photos: document.getElementById('page-photos'),
+        contact: document.getElementById('page-contact')
+      };
+
+      const navButtons = document.querySelectorAll('.nav-btn[data-page-target]');
+      const pageTriggers = document.querySelectorAll('[data-page-target]');
+
+      function showPage(pageKey) {
+        if (!pages[pageKey]) pageKey = 'about';
+        Object.keys(pages).forEach((key) => {
+          pages[key].classList.toggle('active', key === pageKey);
+        });
+        navButtons.forEach((btn) => {
+          if (btn.getAttribute('data-page-target') === pageKey) {
+            btn.setAttribute('aria-current', 'page');
+          } else {
+            btn.removeAttribute('aria-current');
+          }
+        });
+        if (window.location.hash !== '#' + pageKey) {
+          history.replaceState(null, '', '#' + pageKey);
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      pageTriggers.forEach((el) => {
+        el.addEventListener('click', () => {
+          showPage(el.getAttribute('data-page-target'));
+        });
+      });
+
+      const initialHash = window.location.hash.replace('#', '');
+      if (pages[initialHash]) {
+        showPage(initialHash);
+      }
+
+      // Season filter pills
+      const seasonPills = document.querySelectorAll('.season-pill[data-season-filter]');
+      const seasonCards = document.querySelectorAll('.season-card[data-season]');
+
+      seasonPills.forEach((pill) => {
+        pill.addEventListener('click', () => {
+          const filter = pill.getAttribute('data-season-filter');
+          seasonPills.forEach((p) => p.classList.toggle('active', p === pill));
+          seasonCards.forEach((card) => {
+            const match = filter === 'all' || card.getAttribute('data-season') === filter;
+            card.classList.toggle('hidden', !match);
+          });
+        });
+      });
+
+      // Local photo file picker (lets users preview their local photos immediately)
+      const picker = document.getElementById('photo-picker');
+      if (picker) {
+        picker.addEventListener('change', (e) => {
+          const files = Array.from(e.target.files || []);
+          files.forEach((file) => {
+            const url = URL.createObjectURL(file);
+            if (file.name === 'IMG-20261113-WA0034.jpg') {
+              document.querySelectorAll('img[src="IMG-20261113-WA0034.jpg"]').forEach((img) => {
+                img.src = url;
+                img.style.display = 'block';
+                if (img.nextElementSibling) img.nextElementSibling.style.display = 'none';
+              });
+            }
+            const card = document.querySelector('.photo-card[data-filename="' + CSS.escape(file.name) + '"]');
+            if (card) {
+              const img = card.querySelector('img');
+              const fallback = card.querySelector('.photo-fallback');
+              if (img) {
+                img.src = url;
+                img.style.display = 'block';
+              }
+              if (fallback) fallback.style.display = 'none';
+            }
+          });
+        });
+      }
+
+      // Copy email button
+      const copyBtn = document.getElementById('copy-email-btn');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          const email = '24thbotzilla@gmail.com';
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email).then(() => {
+              copyBtn.textContent = 'Copied!';
+              setTimeout(() => { copyBtn.textContent = 'Copy Email'; }, 1800);
+            }).catch(() => {});
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
